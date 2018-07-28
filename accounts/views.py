@@ -1,5 +1,6 @@
-from django.shortcuts import render
-from .models import userProfile
-from testApps.models import testApp
-# Create your views here.
-
+from django.contrib.auth.models import User, Group
+from rest_framework import viewsets
+from tutorial.quickstart.serializers import UserSerializer
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class =UserSerializer

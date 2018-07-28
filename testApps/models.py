@@ -10,12 +10,13 @@ class testApp(models.Model):
     applicationVerdict = models.TextField(default='')
     applicationPartsToReview = models.TextField() #Takes each segment of the application the developer want reviewed separated by ','s
     
-    def applicationQuestions(self):  #Splits each applicationParts.Everything to be be converted as questions
-        applicationParts = str(self.applicationPartsToReview).split(',')
-        return applicationParts
+    # def applicationQuestions(self):  #Splits each applicationParts.Everything to be be converted as questions
+    #     applicationParts = str(self.applicationPartsToReview).split(',')
+    #     return applicationParts
     
-    def getDetailsVisibleToStandardUSer(self): #Returns tuple of details that can be viewed by the standard Test User
-        return self.applicationName,self.applicationDescription,self.applicationDownloads
+    # def getDetailsVisibleToStandardUSer(self): #Returns tuple of details that can be viewed by the standard Test User
+    #     return self.applicationName,self.applicationDescription,self.applicationDownloads
 
-    def getDetailsVisibleToDevelopers(self): #Returns tuple of details that is visible to only the developer peeps
-        return self.applicationID,self.applicationDownloads,self.applicationVerdict
+    # def getDetailsVisibleToDevelopers(self): #Returns tuple of details that is visible to only the developer peeps
+    #     return self.applicationID,self.applicationDownloads,self.applicationVerdict
+
