@@ -1,4 +1,4 @@
 from django.contrib import admin
-from .models import testApp
+from .models import developer
 # Register your models here.
-admin.site.register(testApp)
+admin.site.register(developer)
