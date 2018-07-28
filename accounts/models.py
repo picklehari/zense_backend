@@ -4,7 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from testApps.models import testapps
 import datetime
-class testUser(models.Model):
+class userProfile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     userTags = models.CharField(max_length=1500,null=True,blank=True)
     applicationID = models.ForeignKey(testapps, on_delete=models.CASCADE)
@@ -30,14 +30,3 @@ class testUser(models.Model):
     def getReview(self,appReview):
         self.applicationReview = appReview
 
-class Developer(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-    appsDeveloped = models.ForeignKey(testapps,on_delete=models.CASCADE)
-        @receiver(post_save,sender=User)
-    def create_user_profile(sender,instance,created,**kwargs):
-        if created:
-            testUser.objects,create(user = instance)
-        
-    @receiver(post_save,sender=User)
-    def save_user_profile(sender,instance,**kwargs):
-        instance.profile.save()
