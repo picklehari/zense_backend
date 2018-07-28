@@ -5,20 +5,39 @@ from django.dispatch import receiver
 from testApps.models import testapps
 import datetime
 class testUser(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
     userTags = models.CharField(max_length=1500,null=True,blank=True)
-    applicationID = models.ForeignKeyField(testapps, on_delete=models.CASCADE)
+    applicationID = models.ForeignKey(testapps, on_delete=models.CASCADE)
 #   deviceDetails = models.CharField()   Replace this with appropriate dataType most possibly a CharField or SlugField
-    appUsedFirstOn = models.DateTimeField(default = datetime.datetime.today())
+    appUsedFirstOn = models.DateField(default = datetime.datetime.today())
+    applicationReview = models.CharField(max_length = 2500, blank = True, null=True,default='')    
     
-    def newTester(self,appID,appEnrolled):
-        self.applicationID = appID
-        self.appUsedFirstOn = appEnrolled
-        self.save()
+    @receiver(post_save,sender=User)
+    def create_user_profile(sender,instance,created,**kwargs):
+        if created:
+            testUser.objects,create(user = instance)
+        
+    @receiver(post_save,sender=User)
+    def save_user_profile(sender,instance,**kwargs):
+        instance.profile.save()
 
     def getApplicatonID(self):
         return self.applicationID
 
     def useStreak(self):
-        return datetime.datetime.today() - self.appUsedFirstOn
+        return datetime.date.today() - self.appUsedFirstOn
     
-    
+    def getReview(self,appReview):
+        self.applicationReview = appReview
+
+class Developer(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    appsDeveloped = models.ForeignKey(testapps,on_delete=models.CASCADE)
+        @receiver(post_save,sender=User)
+    def create_user_profile(sender,instance,created,**kwargs):
+        if created:
+            testUser.objects,create(user = instance)
+        
+    @receiver(post_save,sender=User)
+    def save_user_profile(sender,instance,**kwargs):
+        instance.profile.save()
