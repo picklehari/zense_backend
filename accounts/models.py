@@ -5,13 +5,19 @@ from django.dispatch import receiver
 from testApps.models import testapps
 import datetime
 class userProfile(models.Model):
+    ratingsChoices =(
+        ('1' , 'veryBad'),
+        ('2', 'bad'),
+        ('3', 'okay'),
+        ('4', 'good'),
+        ('5', 'excellent')
+    )
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     userTags = models.CharField(max_length=1500,null=True,blank=True)
     applicationID = models.ForeignKey(testapps, on_delete=models.CASCADE)
-#   deviceDetails = models.CharField()   Replace this with appropriate dataType most possibly a CharField or SlugField
+    deviceDetails = models.CharField()   
     appUsedFirstOn = models.DateField(default = datetime.datetime.today())
-    applicationReview = models.CharField(max_length = 2500, blank = True, null=True,default='')    
-    
+    applicationFinalReview = models.TextField(max_length = 2500, blank = True, null=True,default='')    
     @receiver(post_save,sender=User)
     def create_user_profile(sender,instance,created,**kwargs):
         if created:
@@ -30,3 +36,4 @@ class userProfile(models.Model):
     def getReview(self,appReview):
         self.applicationReview = appReview
 
+    
