@@ -4,6 +4,10 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from .models import testApp
 from .serializers import appSerializer
+<<<<<<< HEAD
+=======
+
+>>>>>>> bf7a526728ae092050bfe190c6d6e7d19f422281
 @csrf_exempt
 def applist(request):
     if request.method =='GET':
