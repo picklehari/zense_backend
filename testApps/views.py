@@ -1,10 +1,11 @@
 from django.http import HttpResponse, JsonResponse
-#from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from .models import testApp
 from .serializers import appSerializer
 
+@csrf_exempt
 def applist(request):
     if request.method =='GET':
         apps =testApp.objects.all()

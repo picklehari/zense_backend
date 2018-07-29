@@ -6,7 +6,7 @@ class testApp(models.Model):
     applicationName = models.CharField(max_length=100,null=False)
     applicationDescription = models.CharField(max_length = 1000)
     applicationDownloads = models.IntegerField(default=0)
-    application = models.FileField()
+    application = models.FileField(blank=True)
     uploaderID = models.ForeignKey(developer,on_delete=models.CASCADE)
     applicationVerdict = models.TextField(default='')
     applicationPartsToReview = models.TextField() #Takes each segment of the application the developer want reviewed separated by ','s
