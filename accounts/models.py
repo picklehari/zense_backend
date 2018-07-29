@@ -13,3 +13,6 @@ class userProfile(models.Model):
     deviceDetails = models.TextField(max_length=50000)   
     appUsedFirstOn = models.DateField(default = django.utils.timezone.now)
     applicationFinalReview = models.TextField(max_length = 2500, blank = True, null=True,default='')    
+    def reviewQuestions(self,testApp):
+        return str(testApp.applicationPartsToReview)
+    
